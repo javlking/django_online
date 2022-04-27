@@ -1,0 +1,34 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'css/main_page_css/style.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:regular,500,600,700,800&display=swap" rel="stylesheet" />
+        <title>Title</title>
+    </head>
+
+    <body>
+        <div class="item-practice__content">
+            <img class="info_product" src="{{ products.product_image.url }}" alt="Уникальное место">
+            <hr>
+            <h4 class="item-practice__title"><b>Название продукта:</b> {{products.name}}</h4>
+            <hr>
+            <h4 class="item-practice__title"><b>Описание: </b>{{products.about}}</h4>
+            <hr>
+            <h4 class="iрtem-practice__title"><b>Цена: </b>{{products.price}} сум</h4>
+
+            <!-- Проверка сделал ли вход пользователь, если да то показывает этот блок-->
+            {% if user.is_authenticated %}
+
+                <div>
+                    <h4><a href="">В корзину</a></h4>
+                </div>
+
+            {% endif %}
+            <hr>
+        </div>
+    </body>
+
+</html>

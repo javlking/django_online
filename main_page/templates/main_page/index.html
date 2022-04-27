@@ -1,0 +1,116 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/main_page_css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:regular,500,600,700,800&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OnlineStore</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container _container">
+                <a href="" class="header__logo">
+                    OnlineShop
+                </a>
+                <nav class="header__menu menu">
+                    <ul class="menu__list">
+                        <form method="POST">
+                            {% csrf_token %}
+                        <li class="menu__item">
+                            {{form}}
+                        </li>
+                            <input type="submit" value="Поиск">
+                        </form>
+                        <li class="menu__item">
+                            <a href="#index" class="menu__link">Главная</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="#about" class="menu__link">Каталог</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="#conta" class="menu__link">Контакты</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="accounts/login/" class="menu__link">Вход</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="page">
+            <div class="page__main-block main-block">
+                <div id="index" class="main-block__container _container">
+                    <div class="main-block__body">
+                        <h1 class="main-block__title">Мой первый онлайн-магазин</h1>
+                    </div>
+                </div>
+                <div class="main-block__image _ibg">
+                    <img src="{% static 'img/main.jpg' %}" alt="cover">
+                </div>
+            </div>
+            <section class="page__practice practice">
+                <div id='about' class="practice__container _container">
+                    <div class="practice__header header-block">
+                        <h2 class="header-block__title">ПОПУЛЯРНЫЕ ТОВАРЫ</h2>
+                        <div class="header-block__sub-title">
+                            В этом блоке мы решил представить вам самые популярные товары этого сезона
+                        </div>
+                    </div>
+
+                    <div class="practice__body">
+                        {% for product in products %}
+                        <div class="practice__column">
+                            <article class="practice__item item-practice">
+                                <div class="item-practice__image _ibg">
+                                    <img src="{{ product.product_image.url }}" alt="Уникальное место">
+                                </div>
+                                <div class="item-practice__content">
+                                    <h4 class="item-practice__title"><a href="{% url 'product_about' product.id %}">{{product.name}}</a> {{product.price}} сум</h4>
+                                    <div class="item-practice__text">{{product.category}}</div>
+                                </div>
+
+                            </article>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <footer class="footer">
+            <div class="footer">
+                <div class="footer__top">
+                    <div class="footer__main _container">
+                        <div class="footer__row">
+                            <div id='conta' class="footer__column">
+                                <div class="footer__label">Контакты</div>
+                                <div class="footer__contacts contacts-footer">
+                                    <a href="#" class="contacts-footer__item contacts-footer__item_phone">(998 99) 999 99 99</a>
+                                    <a href="#" class="contacts-footer__item contacts-footer__item_map">Узбекистан</a>
+                                    <a href="#" class="contacts-footer__item contacts-footer__item_graphik">Понедельник - Воскресенье: 10.00 - 18.30</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <div class="footer__container _container">
+                        <div class="footer__copy"> <img src="img/copyright-sign.svg" alt=""> OnlineShop</div>
+                        <div class="footer__social social">
+                            <a class="social__item" href="#"><img src="img/telegram.svg" alt="social"></a>
+                            <a class="social__item" href="#"><img src="img/facebook.svg" alt="social"></a>
+                            <a class="social__item" href="#"><img src="img/instagram.svg" alt="social"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
